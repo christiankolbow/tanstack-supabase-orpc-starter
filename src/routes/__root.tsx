@@ -6,6 +6,9 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { DefaultCatchBoundary } from "@/components/DefaultCatchBoundary";
+import { NotFound } from "@/components/NotFound";
+import { seo } from "@/lib/seo";
 import Header from "../components/Header";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
@@ -24,9 +27,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 				name: "viewport",
 				content: "width=device-width, initial-scale=1",
 			},
-			{
-				title: "TanStack Start Starter",
-			},
+			...seo({
+				title:
+					"TanStack Start | Type-Safe, Client-First, Full-Stack React Framework",
+				description: `TanStack Start is a type-safe, client-first, full-stack React framework. `,
+			}),
 		],
 		links: [
 			{
@@ -36,13 +41,20 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 		],
 	}),
 
+	notFoundComponent: () => <NotFound />,
+	errorComponent: (props) => {
+		return (
+			<RootDocument>
+				<DefaultCatchBoundary {...props} />
+			</RootDocument>
+		);
+	},
 	shellComponent: RootDocument,
-	notFoundComponent: () => <div>404 Not Found</div>,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="de">
 			<head>
 				<HeadContent />
 			</head>

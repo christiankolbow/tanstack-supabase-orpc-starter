@@ -18,7 +18,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as ProtectedTodoSsrRouteImport } from './routes/_protected/todoSsr'
 import { Route as ProtectedTodoRouteImport } from './routes/_protected/todo'
-import { Route as ProtectedTestRouteImport } from './routes/_protected/test'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -65,11 +64,6 @@ const ProtectedTodoRoute = ProtectedTodoRouteImport.update({
   path: '/todo',
   getParentRoute: () => ProtectedRouteRoute,
 } as any)
-const ProtectedTestRoute = ProtectedTestRouteImport.update({
-  id: '/test',
-  path: '/test',
-  getParentRoute: () => ProtectedRouteRoute,
-} as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
@@ -82,7 +76,6 @@ export interface FileRoutesByFullPath {
   '/logout': typeof LogoutRoute
   '/recover': typeof RecoverRoute
   '/register': typeof RegisterRoute
-  '/test': typeof ProtectedTestRoute
   '/todo': typeof ProtectedTodoRoute
   '/todoSsr': typeof ProtectedTodoSsrRoute
   '/api/$': typeof ApiSplatRoute
@@ -94,7 +87,6 @@ export interface FileRoutesByTo {
   '/logout': typeof LogoutRoute
   '/recover': typeof RecoverRoute
   '/register': typeof RegisterRoute
-  '/test': typeof ProtectedTestRoute
   '/todo': typeof ProtectedTodoRoute
   '/todoSsr': typeof ProtectedTodoSsrRoute
   '/api/$': typeof ApiSplatRoute
@@ -108,7 +100,6 @@ export interface FileRoutesById {
   '/logout': typeof LogoutRoute
   '/recover': typeof RecoverRoute
   '/register': typeof RegisterRoute
-  '/_protected/test': typeof ProtectedTestRoute
   '/_protected/todo': typeof ProtectedTodoRoute
   '/_protected/todoSsr': typeof ProtectedTodoSsrRoute
   '/api/$': typeof ApiSplatRoute
@@ -122,7 +113,6 @@ export interface FileRouteTypes {
     | '/logout'
     | '/recover'
     | '/register'
-    | '/test'
     | '/todo'
     | '/todoSsr'
     | '/api/$'
@@ -134,7 +124,6 @@ export interface FileRouteTypes {
     | '/logout'
     | '/recover'
     | '/register'
-    | '/test'
     | '/todo'
     | '/todoSsr'
     | '/api/$'
@@ -147,7 +136,6 @@ export interface FileRouteTypes {
     | '/logout'
     | '/recover'
     | '/register'
-    | '/_protected/test'
     | '/_protected/todo'
     | '/_protected/todoSsr'
     | '/api/$'
@@ -230,13 +218,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedTodoRouteImport
       parentRoute: typeof ProtectedRouteRoute
     }
-    '/_protected/test': {
-      id: '/_protected/test'
-      path: '/test'
-      fullPath: '/test'
-      preLoaderRoute: typeof ProtectedTestRouteImport
-      parentRoute: typeof ProtectedRouteRoute
-    }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
@@ -248,13 +229,11 @@ declare module '@tanstack/react-router' {
 }
 
 interface ProtectedRouteRouteChildren {
-  ProtectedTestRoute: typeof ProtectedTestRoute
   ProtectedTodoRoute: typeof ProtectedTodoRoute
   ProtectedTodoSsrRoute: typeof ProtectedTodoSsrRoute
 }
 
 const ProtectedRouteRouteChildren: ProtectedRouteRouteChildren = {
-  ProtectedTestRoute: ProtectedTestRoute,
   ProtectedTodoRoute: ProtectedTodoRoute,
   ProtectedTodoSsrRoute: ProtectedTodoSsrRoute,
 }
